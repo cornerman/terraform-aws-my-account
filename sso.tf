@@ -31,13 +31,6 @@ module "sso_account_assignments" {
       principal_type      = "GROUP"
       principal_name      = local.sso_admin_group_name
     }],
-    [for sub_account, opts in var.sub_accounts : {
-      account             = aws_organizations_account.sub_account[sub_account].id
-      permission_set_arn  = module.permission_sets[0].permission_sets[local.sso_admin_permission_set].arn
-      permission_set_name = local.sso_admin_permission_set
-      principal_type      = "GROUP"
-      principal_name      = "${local.sso_admin_group_name}-${sub_account}"
-    }],
     [{
       account             = data.aws_caller_identity.current.account_id
       permission_set_arn  = module.permission_sets[0].permission_sets[local.sso_admin_permission_set].arn
