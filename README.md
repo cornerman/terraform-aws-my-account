@@ -3,9 +3,9 @@
 Basic things to setup your AWS account.
 
 This module is for you, if you want an easy way to bootstrap your AWS account with a few sane defaults.
-You will get a declarative way to define your budget (and get email alerts when spending too much).
-You can easily setup and remove new sub-accounts for your different projects (sets up an AWS organization for you).
-You get a secure way of logging into your AWS accounts without ever using long-lived credentials on IAM users (basic AWS SSO).
+- You will get a declarative way to define your budget (and get email alerts when spending too much).
+- You can easily setup and remove new sub-accounts for your different projects (sets up an AWS organization for you).
+- You get a secure way of logging into your AWS accounts without ever using long-lived credentials on IAM users (basic AWS SSO).
 
 ## Requirements
 
