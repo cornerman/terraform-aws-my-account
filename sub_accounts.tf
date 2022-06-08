@@ -17,7 +17,7 @@ resource "aws_organizations_account" "sub_account" {
   for_each  = local.sub_accounts
   name      = each.key
   email     = each.value.email
-  role_name = "OrganizationAccountAccessRole"
+  role_name = local.account_role_name
 
   close_on_deletion = each.value.close_on_deletion
 }

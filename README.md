@@ -10,6 +10,7 @@ This module is for you, if you want an easy way to bootstrap your AWS account wi
 ## Requirements
 
 - terraform (>= 1.0.0)
+- Recommended: [aws-vault](https://github.com/99designs/aws-vault)
 
 ## How to use?
 

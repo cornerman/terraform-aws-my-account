@@ -1,3 +1,3 @@
-output "out" {
-  value = module.my_account.test
+output "aws_config" {
+  value = module.my_account.aws_config
 }

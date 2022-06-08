@@ -46,6 +46,8 @@ locals {
   sub_accounts = var.sub_accounts == null ? null : defaults(var.sub_accounts, {
   })
 
+  account_role_name = "OrganizationAccountAccessRole"
+
   sso_admin_group_name     = "Administrators"
   sso_admin_permission_set = "AdministratorAccess"
 }
