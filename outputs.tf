@@ -1,6 +1,10 @@
 output "aws_config" {
   value = <<EOT
 
+# This should go into your ~/.aws/config.
+# Then you can use `export AWS_PROFILE=${var.name}` to work with the aws-cli.
+# You will need to install aws-vault.
+
 [profile ${var.name}_sso]
 sso_start_url = https://${one(data.aws_ssoadmin_instances.current.identity_store_ids)}.awsapps.com/start
 sso_region = ${data.aws_region.current.name}
