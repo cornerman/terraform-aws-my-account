@@ -27,9 +27,6 @@ module "my_account" {
     limit_monthly_dollar = 10
   }
 
-  sso = {
-  }
-
   sub_accounts = {
     sandbox = {
       email             = "me+sandbox@example.com"

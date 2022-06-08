@@ -17,13 +17,6 @@ variable "budget" {
   default = null
 }
 
-variable "sso" {
-  description = "create sub accounts for projects"
-  type = map(object({
-  }))
-  default = null
-}
-
 variable "sub_accounts" {
   description = "create sub accounts for projects"
   type = map(object({
@@ -38,9 +31,6 @@ locals {
   prefix = "my-account"
 
   budget = var.budget == null ? null : defaults(var.budget, {
-  })
-
-  sso = var.sso == null ? null : defaults(var.sso, {
   })
 
   sub_accounts = var.sub_accounts == null ? null : defaults(var.sub_accounts, {
