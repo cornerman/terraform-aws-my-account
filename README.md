@@ -79,3 +79,41 @@ Deploy this terraform module:
 terraform init
 terraform apply
 ```
+
+As output, you will get the aws config for your whole AWS account including the SSO login and role assumption into your sub-accounts. It will look similar to this:
+```
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+aws_config = <<EOT
+
+# This should go into your ~/.aws/config.
+# Then you can use `export AWS_PROFILE=my-account-name` to work with the aws-cli.
+# You will need to install aws-vault.
+
+[profile my-account-name_sso]
+sso_start_url = https://d-xxxxxxxxxx.awsapps.com/start
+sso_region = eu-central-1
+sso_account_id = 000000000000
+sso_role_name = AdministratorAccess
+region = eu-central-1
+output = json
+
+[profile my-account-name]
+region = eu-central-1
+output = json
+credential_process = aws-vault exec my-account-name_sso --json
+
+[profile my-account-name-sandbox]
+role_arn = arn:aws:iam::111111111111:role/OrganizationAccountAccessRole
+source_profile = my-account-name
+region = eu-central-1
+
+[profile my-account-name-my-project]
+role_arn = arn:aws:iam::222222222222:role/OrganizationAccountAccessRole
+source_profile = my-account-name
+region = eu-central-1
+
+EOT
+```
