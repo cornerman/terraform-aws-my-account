@@ -22,7 +22,6 @@ variable "sub_accounts" {
   type = map(object({
     email             = string
     close_on_deletion = bool
-    sso_group         = optional(string)
   }))
   default = {}
 }
