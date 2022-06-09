@@ -4,7 +4,7 @@ module "my_account" {
   source = "../"
 
   name  = "johannes-private"
-  email = "aws@johannes.karoff.net"
+  email = "me@example.com"
 
   budget = {
     limit_monthly_dollar = 10
@@ -12,15 +12,11 @@ module "my_account" {
 
   sub_accounts = {
     sandbox = {
-      email             = "aws.sandbox@johannes.karoff.net"
-      close_on_deletion = false
+      email             = "me+sandbox@example.com"
+      close_on_deletion = true
     }
-    issue_tracker = {
-      email             = "aws.issue-tracker@johannes.karoff.net"
-      close_on_deletion = false
-    }
-    artifacts = {
-      email             = "aws.artifacts@johannes.karoff.net"
+    my-project = {
+      email             = "me.my-project@example.com"
       close_on_deletion = false
     }
   }
