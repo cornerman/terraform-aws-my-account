@@ -50,7 +50,7 @@ Enable MFA for your root user for your own security - this is seriously importan
 
 #### Initial Access
 
-Manually create an IAM user with admin access and get the security credentials (you should delete this user afterwards) or once add security credentials to the root user (and remove them again).
+Manually create an IAM user with admin access and get the security credentials (you should delete this user afterwards) *or* once add security credentials to the root user (and remove them afterwards).
 
 Set the AWS credentials for this user in your terminal (e.g. environment variable `AWS_PROFILE` or `AWS_ACCESS_KEY`/`AWS_SECRET_ACCESS_KEY`/`AWS_REGION`). After your have deployed this module once, you will use a different way of authenticating using AWS SSO (see later).
 
@@ -67,10 +67,9 @@ Then create a terraform state bucket and a terraform dynamodb lock table:
 
 Manual steps needed to prepare SSO:
 - Enable SSO in your AWS account: https://console.aws.amazon.com/singlesignon/identity/home
-- Create an identity group called "Administrators" in AWS SSO: https://console.aws.amazon.com/singlesignon/identity/home#!/groups/create
 - Enable MFA in AWS SSO: https://console.aws.amazon.com/singlesignon/identity/home#!/settings/mfa
-
-Afterwards you should add a user for yourself in AWS SSO and add it to the Administrators group. You can add other people as well and invite them to work with you.
+- Create an identity group called "Administrators" in AWS SSO: https://console.aws.amazon.com/singlesignon/identity/home#!/groups/create
+- Create an identity user for yourself and add it to the Administrators group (you can add other people as well and invite them to work with you): https://eu-central-1.console.aws.amazon.com/singlesignon/identity/home?region=eu-central-1#!/users$addUserWizard
 
 ### Deploy
 
@@ -117,3 +116,5 @@ region = eu-central-1
 
 EOT
 ```
+
+The url `https://d-xxxxxxxxxx.awsapps.com/start` is now your login url to get access to the browser console.
