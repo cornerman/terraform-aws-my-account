@@ -56,7 +56,7 @@ Set the AWS credentials for this user in your terminal (e.g. environment variabl
 
 #### Setup
 
-Go into the `./example` folder.
+Go into or copy the `./example` directroy.
 
 Then create a terraform state bucket and a terraform dynamodb lock table:
 ```sh
