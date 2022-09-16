@@ -46,6 +46,8 @@ module "my_account" {
 
 Create a new AWS account: https://portal.aws.amazon.com/billing/signup
 
+You can of course also use your existing AWS account, but it is a good start to clean with a clean root account for management and then have sub-accounts for specific use-cases. See at the bottom of the readme, how to import existing accounts.
+
 Enable MFA for your root user for your own security - this is seriously important. Click this link and expand the Multi-Factor-Authentication tab: https://console.aws.amazon.com/iam/home#/security_credentials
 
 #### Initial Access
@@ -118,3 +120,49 @@ EOT
 ```
 
 The url `https://d-xxxxxxxxxx.awsapps.com/start` is now your login url to get access to the browser console.
+
+## Tips and Tricks
+
+### Import an existing AWS account into the Organization
+
+Say you have an existing AWS account and want to use it inside this module.
+
+First go into AWS and follow the steps to import an account into your now existing AWS organization. You can invite an account id and then accept the invitation inside the other: TODO:link
+
+Then change your terraform code to how you want your sub_accounts to look with the imported account:
+
+```tf
+module "my_account" {
+  source  = "cornerman/my-account/aws"
+  version = "0.1.0"
+
+  name  = "my-account-name"
+  email = "me@example.com"
+
+  budget = {
+    limit_monthly_dollar = 10
+  }
+
+  sub_accounts = {
+    sandbox = {
+      email             = "me+sandbox@example.com"
+      close_on_deletion = true
+    }
+    my-project = {
+      email             = "me.my-project@example.com"
+      close_on_deletion = false
+    }
+    my-imported-account = {
+      email             = "<email address of the root user of that account>"
+      close_on_deletion = false
+    }
+  }
+}
+```
+
+Then run terraform to let terraform know that this account already exists and should not be created:
+```shell
+terraform import 'module.my_account.aws_organizations_account.sub_account["my-imported-account"]' <account id of the old account>
+```
+
+From there on, you can run `terraform apply` to completely setup the new account. Check out the terraform plan to see whether everything worked as expected.
