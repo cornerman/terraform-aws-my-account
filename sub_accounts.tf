@@ -20,4 +20,10 @@ resource "aws_organizations_account" "sub_account" {
   role_name = local.account_role_name
 
   close_on_deletion = each.value.close_on_deletion
+
+  # https://github.com/hashicorp/terraform-provider-aws/issues/8947
+  # There is no AWS Organizations API for reading role_name
+  lifecycle {
+    ignore_changes = ["role_name"]
+  }
 }
