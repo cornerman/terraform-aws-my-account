@@ -19,10 +19,18 @@ output = json
 credential_process = aws-vault exec ${var.name}_sso --json
 
 ${join("\n", [for sub_account in aws_organizations_account.sub_account : <<EOI
-[profile ${var.name}-${sub_account.name}]
-role_arn = arn:aws:iam::${sub_account.id}:role/${local.account_role_name}
-source_profile = ${var.name}
+[profile ${var.name}-${sub_account.name}_sso]
+sso_start_url = https://${one(data.aws_ssoadmin_instances.current.identity_store_ids)}.awsapps.com/start
+sso_region = ${data.aws_region.current.name}
+sso_account_id = ${sub_account.id}
+sso_role_name = AdministratorAccess
 region = ${data.aws_region.current.name}
+output = json
+
+[profile ${var.name}-${sub_account.name}]
+region = ${data.aws_region.current.name}
+output = json
+credential_process = aws-vault exec ${var.name}-${sub_account.name}_sso --json
 EOI
 ])}
 EOT
