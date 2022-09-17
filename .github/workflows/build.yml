@@ -1,0 +1,22 @@
+name: Test
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Validate
+        run: |
+          terraform init
+          terraform validate
+
