@@ -48,7 +48,7 @@ module "my_account" {
 
 Create a new AWS account: https://portal.aws.amazon.com/billing/signup
 
-You can of course also use your existing AWS account, but it is a good start to clean with a clean root account for management and then have sub-accounts for specific use-cases. See at the bottom of the readme, how to import existing accounts.
+You can of course also use your existing AWS account, but it is a good to start with a clean root account for management and then have sub-accounts for specific use-cases. See at the bottom of the readme, how to import existing accounts.
 
 Enable MFA for your root user for your own security - this is seriously important. Click this link and expand the Multi-Factor-Authentication tab: https://console.aws.amazon.com/iam/home#/security_credentials
 
@@ -177,7 +177,7 @@ Then change your terraform code to how you want your sub_accounts to look with t
 ```tf
 module "my_account" {
   source  = "cornerman/my-account/aws"
-  version = "0.1.0"
+  version = "0.1.3"
 
   name  = "my-account-name"
   email = "me@example.com"
