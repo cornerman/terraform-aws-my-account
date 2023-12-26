@@ -1,9 +1,9 @@
 resource "aws_budgets_budget" "budget" {
-  count = local.budget == null ? 0 : 1
+  count = var.budget == null ? 0 : 1
 
   name              = "${local.prefix}-budget-monthly"
   budget_type       = "COST"
-  limit_amount      = local.budget.limit_monthly_dollar
+  limit_amount      = var.budget.limit_monthly_dollar
   limit_unit        = "USD"
   time_unit         = "MONTHLY"
   time_period_start = "2022-01-01_00:00"

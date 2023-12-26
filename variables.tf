@@ -29,12 +29,6 @@ variable "sub_accounts" {
 locals {
   prefix = "my-account"
 
-  budget = var.budget == null ? null : defaults(var.budget, {
-  })
-
-  sub_accounts = var.sub_accounts == null ? null : defaults(var.sub_accounts, {
-  })
-
   account_role_name = "OrganizationAccountAccessRole"
 
   sso_admin_group_name     = "Administrators"

@@ -14,7 +14,7 @@ resource "aws_organizations_organization" "organization" {
 }
 
 resource "aws_organizations_account" "sub_account" {
-  for_each  = local.sub_accounts
+  for_each  = var.sub_accounts
   name      = each.key
   email     = each.value.email
   role_name = local.account_role_name
@@ -24,6 +24,6 @@ resource "aws_organizations_account" "sub_account" {
   # https://github.com/hashicorp/terraform-provider-aws/issues/8947
   # There is no AWS Organizations API for reading role_name
   lifecycle {
-    ignore_changes = ["role_name"]
+    ignore_changes = [role_name]
   }
 }
